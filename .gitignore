@@ -1,0 +1,10 @@
+.project
+.settings
+node_modules/
+.vscode/
+build/
+dist/
+.DS_Store
+.tmp/
+.idea/
+.fusebox
