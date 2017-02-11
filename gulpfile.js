@@ -25,7 +25,8 @@ gulp.task("copy-ui-development-html", () => {
         .pipe(gulp.dest(devReactFolder))
 });
 
-gulp.task("run-react-ui", ['copy-ui-development-html'], () => {
+const ReactDevelopment = (opts) => {
+
     // bundle vendor
     fsbx.FuseBox.init({
         homeDir: "src/client",
@@ -49,7 +50,11 @@ gulp.task("run-react-ui", ['copy-ui-development-html'], () => {
             ]
         ],
         outFile: `${devReactFolder}/bundles/app.js`,
-    }).devServer(">[development.tsx] +process", { httpServer: false, port: 5678 });
+    }).devServer(">[development.tsx] +process", opts);
+}
+
+gulp.task("run-react-ui", ['copy-ui-development-html'], () => {
+    ReactDevelopment({ httpServer: false, port: 5678 })
 });
 
 
@@ -110,11 +115,15 @@ gulp.task('server', function() {
 });
 
 gulp.task('start', ['fuse-box-server'], function() {
-    process.env.EMIT_TEST_EVENTS = true;
+
     runSequence(['server', 'run-react-ui'])
     gulp.watch(['src/server/**/*.ts'], () => {
         runSequence('fuse-box-server', 'server')
     });
+});
+
+gulp.task('dev', ['copy-ui-development-html'], function() {
+    return ReactDevelopment({ root: "dist/client/development", port: 3000 });
 });
 
 
