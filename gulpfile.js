@@ -39,6 +39,10 @@ const ReactDevelopment = (opts) => {
     fsbx.FuseBox.init({
         homeDir: "src/client",
         log: false,
+        sourceMap: {
+            bundleReference: 'app.js.map',
+            outFile: `${devReactFolder}/bundles/app.js.map`
+        },
         plugins: [
             fsbx.JSONPlugin(),
             fsbx.TypeScriptHelpers(),
