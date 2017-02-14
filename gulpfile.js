@@ -93,10 +93,10 @@ gulp.task("dist-react-production", (done) => {
                 fsbx.CSSPlugin()
             ],
 
-            fsbx.UglifyJSPlugin()
+            // fsbx.UglifyJSPlugin()
         ],
         outFile: `${prodReactFolder}/bundles/app.js`,
-    }).bundle(">application.tsx", done);
+    }).bundle(">development.tsx", done);
 });
 
 gulp.task("hash", function() {
