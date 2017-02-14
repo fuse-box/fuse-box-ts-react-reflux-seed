@@ -93,7 +93,7 @@ gulp.task("dist-react-production", (done) => {
                 fsbx.CSSPlugin()
             ],
 
-            // fsbx.UglifyJSPlugin()
+            fsbx.UglifyJSPlugin()
         ],
         outFile: `${prodReactFolder}/bundles/app.js`,
     }).bundle(">development.tsx", done);
