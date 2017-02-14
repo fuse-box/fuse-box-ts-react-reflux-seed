@@ -3,12 +3,17 @@ const runSequence = require('run-sequence');
 const spawn = require('child_process').spawn;
 const child_process = require('child_process');
 const fsbx = require("fuse-box");
+const hash_src = require("gulp-hash-src");
+const htmlmin = require("gulp-htmlmin");
+const clean = require('gulp-clean');
+
 let node;
 /**
  * ********************************************************
  * REACT UI build
  */
 const devReactFolder = 'dist/client/development';
+const prodReactFolder = 'dist/client/production';
 
 /**
  * Project dependencies
@@ -70,6 +75,15 @@ gulp.task("run-react-ui", ['copy-ui-development-html'], () => {
 gulp.task("dist-react-production", (done) => {
     fsbx.FuseBox.init({
         homeDir: "src/client",
+        log: false,
+        outFile: `${prodReactFolder}/bundles/vendor.js`,
+        plugins: [
+            fsbx.UglifyJSPlugin()
+        ]
+    }).bundle(REACT_DEPS);
+
+    fsbx.FuseBox.init({
+        homeDir: "src/client",
         log: true,
         cache: false,
         globals: { default: "MySuperApplication" },
@@ -85,11 +99,19 @@ gulp.task("dist-react-production", (done) => {
 
             fsbx.UglifyJSPlugin()
         ],
-        outFile: `dist/client/production/bundle.min.js`,
-    }).bundle(">application.tsx", done);
+        outFile: `${prodReactFolder}/bundles/app.js`,
+    }).bundle(">development.tsx", done);
 });
 
+gulp.task("hash", function() {
+    console.log(prodReactFolder)
 
+    gulp.src("src/client/index.html")
+        .pipe(gulp.dest(prodReactFolder))
+        .pipe(htmlmin())
+        .pipe(hash_src({verbose: true, build_dir: `./${prodReactFolder}`, src_path: `./${prodReactFolder}`}))
+        .pipe(gulp.dest(`./${prodReactFolder}`))
+});
 
 /**
  * ********************************************************
@@ -101,9 +123,6 @@ gulp.task("fuse-box-server", (done) => {
         outFile: "dist/server/development/app.js",
     }).bundle(">[app.ts]", done);
 });
-
-
-
 
 gulp.task('server', function() {
     if (node) node.kill()
@@ -126,11 +145,16 @@ gulp.task('start', ['fuse-box-server'], function() {
     });
 });
 
+gulp.task('clean', function () {
+    return gulp.src(prodReactFolder, {read: false})
+        .pipe(clean());
+});
+
 gulp.task('dev', ['copy-ui-development-html'], function() {
     return ReactDevelopment({ root: "dist/client/development", port: 3000 });
 });
 
 
-gulp.task("dist", ['dist-react-production'], () => {
-
+gulp.task("dist", () => {
+    runSequence('dist-react-production', 'hash')
 });
