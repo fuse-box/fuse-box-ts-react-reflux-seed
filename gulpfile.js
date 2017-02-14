@@ -36,8 +36,10 @@ const ReactDevelopment = (opts) => {
     fsbx.FuseBox.init({
         homeDir: "src/client",
         log: false,
-        outFile: `${devReactFolder}/bundles/vendor.js`,
-    }).bundle(REACT_DEPS);
+    }).bundle({
+        [`${devReactFolder}/bundles/vendor.js`]: REACT_DEPS,
+        [`${devReactFolder}/bundles/lazy.js`]: '[lazy.ts]',
+    });
 
     // Start dev Socket
     // Isolate dependencies
