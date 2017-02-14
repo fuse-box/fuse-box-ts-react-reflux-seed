@@ -29,11 +29,6 @@ gulp.task("copy-ui-development-html", () => {
         .pipe(gulp.dest(devReactFolder))
 });
 
-gulp.task("copy-ui-production-html", () => {
-    gulp.src("src/client/index.html")
-        .pipe(gulp.dest(prodReactFolder))
-});
-
 const ReactDevelopment = (opts) => {
 
     // bundle vendor
@@ -112,14 +107,6 @@ gulp.task("hash", function() {
         .pipe(hash_src({verbose: true, build_dir: `./${prodReactFolder}`, src_path: `./${prodReactFolder}`}))
         .pipe(gulp.dest(`./${prodReactFolder}`))
 });
-
-gulp.task("hash2", function() {
-    return gulp.src([`./${prodReactFolder}/index.html`])
-        .pipe(hash_src({ verbose: true, build_dir: `./${prodReactFolder}`, src_path: `./${prodReactFolder}`}))
-        .pipe(gulp.dest(`./${prodReactFolder}`))
-});
-
-
 
 /**
  * ********************************************************
