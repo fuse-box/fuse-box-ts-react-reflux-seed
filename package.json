@@ -21,6 +21,7 @@
     "gulp": "^3.9.1",
     "gulp-hash-src": "^0.1.6",
     "gulp-htmlmin": "^3.0.0",
+    "gulp-clean": "^0.3.2",
     "node-sass": "^4.5.0",
     "run-sequence": "^1.2.2",
     "typescript": "^2.1.6",
@@ -28,7 +29,6 @@
   },
   "dependencies": {
     "app-root-path": "^2.0.1",
-    "gulp-clean": "^0.3.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "reflux": "^6.1.0"
