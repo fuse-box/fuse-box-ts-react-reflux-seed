@@ -11,10 +11,8 @@ export class HelloWorld extends Reflux.Component<IHelloWorldProps, any> {
     public render() {
         // this only shows that initially the inport does not exist
         // but after pressing the button it will exists as it will be cached
-        try {
-            const initLazy = FuseBox.import("../lazy"); // will be null
-            console.log('Currently lazy is: ' + initLazy);
-        } catch (_ex) { /**/ }
+        const initLazy = FuseBox.import("../lazy"); // will be null
+        console.log('Currently lazy is: ' + initLazy);
 
         return (
             <button onClick={() => {
