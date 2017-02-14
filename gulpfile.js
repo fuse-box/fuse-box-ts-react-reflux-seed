@@ -5,6 +5,7 @@ const child_process = require('child_process');
 const fsbx = require("fuse-box");
 const hash_src = require("gulp-hash-src");
 const htmlmin = require("gulp-htmlmin");
+const clean = require('gulp-clean');
 
 let node;
 /**
@@ -138,6 +139,11 @@ gulp.task('start', ['fuse-box-server'], function() {
     gulp.watch(['src/server/**/*.ts'], () => {
         runSequence('fuse-box-server', 'server')
     });
+});
+
+gulp.task('clean', function () {
+    return gulp.src(prodReactFolder, {read: false})
+        .pipe(clean());
 });
 
 gulp.task('dev', ['copy-ui-development-html'], function() {
