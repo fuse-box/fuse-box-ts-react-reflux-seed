@@ -61,7 +61,7 @@ const ReactDevelopment = (opts) => {
             ]
         ],
         outFile: `${devReactFolder}/bundles/app.js`,
-    }).devServer(">[development.tsx] +process", opts);
+    }).devServer(">[development.tsx] +process -lazy.ts", opts);
 }
 
 gulp.task("run-react-ui", ['copy-ui-development-html'], () => {
@@ -111,7 +111,7 @@ gulp.task("hash", function() {
     gulp.src("src/client/index.html")
         .pipe(gulp.dest(prodReactFolder))
         .pipe(htmlmin())
-        .pipe(hash_src({verbose: true, build_dir: `./${prodReactFolder}`, src_path: `./${prodReactFolder}`}))
+        .pipe(hash_src({ verbose: true, build_dir: `./${prodReactFolder}`, src_path: `./${prodReactFolder}` }))
         .pipe(gulp.dest(`./${prodReactFolder}`))
 });
 
@@ -147,8 +147,8 @@ gulp.task('start', ['fuse-box-server'], function() {
     });
 });
 
-gulp.task('clean', function () {
-    return gulp.src(prodReactFolder, {read: false})
+gulp.task('clean', function() {
+    return gulp.src(prodReactFolder, { read: false })
         .pipe(clean());
 });
 
