@@ -30,3 +30,5 @@ export const render = (element) => {
         document.querySelector(element)
     );
 }
+import { improveHMR } from './hmr';
+improveHMR();
