@@ -1,8 +1,8 @@
 declare var FuseBox: any;
-const registerStatefulModules = (moduleNames: string[]) => FuseBox.addPlugin({
+const customizedHMRPlugin = {
     hmrUpdate: ({ type, path, content }) => {
         if (type === "js") {
-            const isModuleNameInPath = (path) => moduleNames.some(name => path.includes(name));
+            const isModuleNameInPath = (path) => statefulModules.some(name => path.includes(name));
 
             /** If a stateful module has changed reload the window */
             if (isModuleNameInPath(path)) {
@@ -25,11 +25,22 @@ const registerStatefulModules = (moduleNames: string[]) => FuseBox.addPlugin({
             return true;
         }
     }
-});
+}
 
+/** Only register the plugin once */
 let alreadyRegistered = false;
-export const improveHMR = () => {
-    if (alreadyRegistered) return;
-    alreadyRegistered = true;
-    registerStatefulModules(['hmr', 'TestStore', 'actions/index']);
+
+/** Current names of stateful modules */
+let statefulModules = [];
+
+/**
+ * Registers given module names as being stateful
+ * @param modulesNames full or partial path to module name
+ */
+export const setStatefulModules = (...moduleNames: string[]) => {
+    if (!alreadyRegistered) {
+        alreadyRegistered = true;
+        FuseBox.addPlugin(customizedHMRPlugin);
+    }
+    statefulModules = moduleNames;
 }

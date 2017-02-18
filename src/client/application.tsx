@@ -30,5 +30,5 @@ export const render = (element) => {
         document.querySelector(element)
     );
 }
-import { improveHMR } from './hmr';
-improveHMR();
+import { setStatefulModules } from './hmr';
+setStatefulModules('hmr', 'store/', 'actions/');
