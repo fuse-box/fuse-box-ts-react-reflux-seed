@@ -30,5 +30,6 @@ export const render = (element) => {
         document.querySelector(element)
     );
 }
-import { setStatefulModules } from './hmr';
-setStatefulModules('hmr', 'store/', 'actions/');
+import { setStatefulModules } from 'fuse-hmr';
+declare var FuseBox;
+setStatefulModules(FuseBox, ['hmr', 'store/', 'actions/']);

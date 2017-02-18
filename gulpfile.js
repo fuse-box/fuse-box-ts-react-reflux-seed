@@ -20,9 +20,10 @@ const prodReactFolder = 'dist/client/production';
  * Later on FuseBox will be able to extract them automatically
  */
 const REACT_DEPS = `
-    +react 
-    +react-dom 
+    +react
+    +react-dom
     +reflux
+    +fuse-hmr
 `
     // Copy dev html
 gulp.task("copy-ui-development-html", () => {
