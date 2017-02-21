@@ -30,7 +30,7 @@ export class HelloWorld extends Reflux.Component<IHelloWorldProps, any> {
 
             }}
                 className="btn btn-primary" type="button">
-                Message increment <span className="badge">{this.state.counter}</span>
+                Message increment<span className="badge">{this.state.counter}</span>
             </button>
         );
     }
