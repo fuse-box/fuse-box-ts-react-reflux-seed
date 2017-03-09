@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "jsx": "React",
-    "module": "CommonJS",
+    "jsx": "react",
+    "module": "commonjs",
     "moduleResolution": "node",
     "target": "ES6",
     "noEmitOnError": false

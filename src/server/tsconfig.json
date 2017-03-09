@@ -15,9 +15,19 @@
         "outDir": "build/",
         "noEmitHelpers": true,
         "preserveConstEnums": true,
-        "suppressImplicitAnyIndexErrors": true
+        "suppressImplicitAnyIndexErrors": true,
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "types": [
+            "node"
+        ]
     },
-    "exclude": [],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "build"
+    ],
     "compileOnSave": false,
     "buildOnSave": false,
     "atom": {
