@@ -23,6 +23,7 @@ const REACT_DEPS = `
     +react
     +react-dom
     +reflux
+    +fuse-hmr
 `
     // Copy dev html
 gulp.task("copy-ui-development-html", () => {
