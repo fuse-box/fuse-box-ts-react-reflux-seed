@@ -20,8 +20,8 @@ const prodReactFolder = 'dist/client/production';
  * Later on FuseBox will be able to extract them automatically
  */
 const REACT_DEPS = `
-    +react 
-    +react-dom 
+    +react
+    +react-dom
     +reflux
 `
     // Copy dev html
@@ -46,10 +46,7 @@ const ReactDevelopment = (opts) => {
     fsbx.FuseBox.init({
         homeDir: "src/client",
         log: false,
-        sourceMap: {
-            bundleReference: 'app.js.map',
-            outFile: `${devReactFolder}/bundles/app.js.map`
-        },
+        sourcemaps: true,
         plugins: [
             fsbx.JSONPlugin(),
             fsbx.TypeScriptHelpers(),
