@@ -19,7 +19,7 @@
   "devDependencies": {
     "@types/node": "^7.0.7",
     "@types/react": "^15.0.14",
-    "fuse-box": "^1.3.124",
+    "fuse-box": "^1.3.126",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
     "gulp-hash-src": "^0.1.6",
