@@ -13,7 +13,6 @@ declare global {
     }
 }
 
-
 /**
  * Render application into a div
  */

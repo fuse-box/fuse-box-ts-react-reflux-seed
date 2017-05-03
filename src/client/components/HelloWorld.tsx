@@ -8,6 +8,7 @@ export interface IHelloWorldProps { }
 export class HelloWorld extends Reflux.Component<IHelloWorldProps, any> {
     private store = TestStore;
     private props: any;
+    public setState: any;
     private state: any;
     public render() {
         // this only shows that initially the inport does not exist
@@ -18,15 +19,6 @@ export class HelloWorld extends Reflux.Component<IHelloWorldProps, any> {
         return (
             <button onClick={() => {
                 Actions.incrementSomething();
-                const loaded = (module) => {
-                    console.log("Lazy loaded", module)
-                    module.default();
-                }
-
-                const moduleName = "~/lazy";
-                FuseBox.exists(moduleName)
-                    ? loaded(require(moduleName)) :
-                    FuseBox.import("./bundles/lazy.js", () => loaded(require(moduleName)))
 
             }}
                 className="btn btn-primary" type="button">
